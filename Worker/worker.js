@@ -8,7 +8,6 @@ const dbConnection = require("./config/mongoConnection");
 const redis = require("redis");
 const redisConnection = require("./redis/redis-connection");
 const nrpSender = require("./redis/nrp-sender-shim")
-const client = require("./config/elasticsearch");
 /*
 dbConnection().then((db) => {
     return db.dropDatabase()
