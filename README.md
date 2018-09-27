@@ -1,6 +1,7 @@
 # Movie Database
 This is a simplified version of https://github.com/yqdu/MovieSharing
 Removed Elasticsearch and ImageMagick to be deployed on a limited performence server.
+Front-end is being rewrited.
 
 ## Introduction
 
