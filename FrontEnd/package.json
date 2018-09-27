@@ -2,7 +2,6 @@
   "name": "moviedata",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://yaoqidu.me/moviedata",
   "dependencies": {
     "form-data": "^2.3.1",
     "isomorphic-fetch": "^2.2.1",
