@@ -3,7 +3,7 @@ const users = mongoCollections.users;
 const uuid = require('node-uuid');
 const bcrypt = require("bcrypt-nodejs");
 const movies = require('./movies');
-const im = require("../imagemagick");
+const fs = require('fs');
 
 let exportedMethods = {
     getAllUsers() {
@@ -71,11 +71,13 @@ let exportedMethods = {
                 _id: uuid.v4(),
                 username: user.username,
                 email: user.email, //decodeURIComponent?
-                profile: im.processProfile(user.profile, user.username),
+                
                 watchedList: [],
                 wishList: [],
                 saltedPassword: bcrypt.hashSync(user.password),
             }
+            fs.createReadStream(user.profile).pipe(fs.createWriteStream('../FrontEnd/public/profilepictures/' + user.username + '.png'));
+            newUser.profile = user.username + '.png'
             return usersCollection.findOne({ username: user.username }).then((u) => {
                 if (u) return false;
                 else {

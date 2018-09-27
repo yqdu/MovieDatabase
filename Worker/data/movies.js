@@ -2,9 +2,8 @@ const mongoCollections = require("../config/mongoCollections");
 const movies = mongoCollections.movies;
 //keep consistent in ES
 //advanced searching using ../elasticsearch
-const es = require("../elasticsearch");
-const im = require("../imagemagick");
 const uuid = require('node-uuid');
+const fs = require('fs');
 
 let exportedMethods = {
     getAllMovies() {
@@ -68,12 +67,16 @@ let exportedMethods = {
                 description: movie.description,
                 category: movie.category
             };
-            newMovie.poster = im.processPoster(movie.poster, newMovie._id);
+            
+            fs.createReadStream(movie.poster).pipe(fs.createWriteStream('../FrontEnd/public/processedposters/' + newMovie._id + '.png'));
+            newMovie.poster = newMovie._id + '.png';
             newMovie.screenShots = [];
             // console.log(movie.screenShots)
             movie.screenShots.forEach((screen) => {
                 // console.log(screen)
-                newMovie.screenShots.push(im.precessScreen(screen));
+                screenID = uuid.v4()
+                fs.createReadStream(screen).pipe(fs.createWriteStream('../FrontEnd/public/processedscreens/' + screenID + '.png'));
+                newMovie.screenShots.push(screenID + '.png');
             })
             return movieCollection.findOne({
                 name: movie.name
@@ -84,26 +87,8 @@ let exportedMethods = {
                     return movieCollection.insertOne(newMovie).then((insertInfo) => {
                         return insertInfo.insertedId;
                     }).then((newId) => {
-                        //todo: consistent in ES
-                        //only stores basic informations in ES
-                        return this.getMovieById(newId).then((insertedMovie) => {
-                            let id = insertedMovie._id;
-                            let copy = {
-                                name: insertedMovie.name,
-                                year: insertedMovie.year,
-                                directors: insertedMovie.directors,
-                                stars: insertedMovie.stars,
-                                writers: insertedMovie.writers,
-                                description: insertedMovie.description,
-                                category: insertedMovie.category
-                            }
-                            es.addMovie(id, copy);
-                            console.log("added a movie!")
-                            return insertedMovie;
-                        }).catch((e) => {
-                            return false;
-                            // throw "Error inserting into ES!"
-                        })
+                        console.log("added a movie!")
+                        return this.getMovieById(newId);
                     }).catch((e) => {
                         return false;
                         // throw "Error inserting into MongoDB!"
@@ -136,7 +121,6 @@ let exportedMethods = {
                 $set: updateInfo
             };
             return movieCollection.updateOne({ _id: updateMovie._id }, updateCommand).then((result) => {
-                es.addMovie(updateMovie._id, updateInfo);
                 return this.getMovieById(updateMovie._id);
             })
         })
@@ -144,17 +128,9 @@ let exportedMethods = {
 
     // search given keyword in all movie
     searchInMovie(keyword) {
-        return es.searchInMovie(keyword).then((results) => {
-            let promises = []
-            if (results) {
-                results.forEach((result) => {
-                    promises.push(this.getMovieById(result._id));
-                })
-            }
-            return Promise.all(promises).then((values) => {
-                return values;
-            })
-        })
+        return movies().then((movieCollection) => {
+            return movieCollection.find({name: keyword}).toArray();
+        });
     },
 
     getMoviesByIdList(ids) {
@@ -172,39 +148,23 @@ let exportedMethods = {
 
     // search for given category
     searchByCategory(category) {
-        return es.searchByCategory(category).then((results) => {
-            let promises = []
-            if (results) {
-                results.forEach((result) => {
-                    promises.push(this.getMovieById(result._id));
-                })
-            }
-            return Promise.all(promises).then((values) => {
-                return values;
-            })
-        })
+        return movies().then((movieCollection) => {
+            return movieCollection.find({category: category}).toArray();
+        });
     },
 
     // search for keyword in given category
     searchInCategory(category, keyword) {
-        return es.searchInCategory(category, keyword).then(async (results) => {
-            let promises = []
-            if (results) {
-                results.forEach((result) => {
-                    promises.push(this.getMovieById(result._id));
-                })
-            }
-            return Promise.all(promises).then((values) => {
-                return values;
-            })
-        })
+        return movies().then((movieCollection) => {
+            return movieCollection.find({category: category, name: keyword}).toArray();
+        });
     },
 
     addScreenshotToMovie(movieId, screenShots) {
         return movies().then((movieCollection) => {
             let screens = [];
             screenShots.forEach((screen) => {
-                screens.push(im.precessScreen(screen));
+                screens.push(screen);
             })
             return movies().then((movieCollection) => {
                 return movieCollection.findOne({ _id: movieId }).then((movie) => {

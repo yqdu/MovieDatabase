@@ -7,20 +7,9 @@ const comments = data.comments;
 const sharemessages = data.sharemessages;
 
 const uuid = require('node-uuid');
-const client = require("./config/elasticsearch");
 //const moment = require("moment");
 
-client.deleteByQuery({
-    index: 'moviesharing',
-    type: 'movie',
-    body: {
-        query: {
-            match_all: {}
-        }
-    }
-}, function (error, response) {
-    console.log("ES deleted!")
-});
+
 let u1, u2, u3, u4;
 let m1;
 let m2;
