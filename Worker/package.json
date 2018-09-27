@@ -1,0 +1,33 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "description": "database worker for the website",
+  "main": "worker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pjw0618/MovieSharing.git"
+  },
+  "keywords": [
+    "worker",
+    "database"
+  ],
+  "author": "The Paladins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pjw0618/MovieSharing/issues"
+  },
+  "homepage": "https://github.com/Pjw0618/MovieSharing#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "elasticsearch": "^14.0.0",
+    "imagemagick": "^0.1.3",
+    "mongodb": "^2.2.33",
+    "node-redis-pubsub": "^1.0.3",
+    "node-uuid": "^1.4.8",
+    "redis": "^2.8.0",
+    "socket.io": "^2.0.4"
+  }
+}
