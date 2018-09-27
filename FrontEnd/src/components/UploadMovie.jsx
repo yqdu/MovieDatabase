@@ -68,7 +68,7 @@ class UploadMovie extends React.Component {
         uploadMovie.append('category', this.state.category);
         uploadMovie.append('poster', this.state.poster);
 
-        request.post('http://localhost:3001/movie/')
+        request.post('http://45.76.50.213:3001/movie/')
         .send(uploadMovie)
         .end((err, resp) =>{
             if (resp.body.success == false) 

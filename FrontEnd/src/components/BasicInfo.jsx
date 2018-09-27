@@ -14,7 +14,7 @@ class BasicInfo extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3001/user/getUserByDbId/'+this.state.userId)
+        fetch('http://45.76.50.213:3001/user/getUserByDbId/'+this.state.userId)
         .then((response) => {
             console.log(response);
             return response.json();

@@ -12,7 +12,7 @@ class ReceivedMessage extends React.Component {
         let self = this;
         let username = localStorage.getItem('username');
 
-        fetch('http://localhost:3001/sharemessage/getreceiverName/' + username, {
+        fetch('http://45.76.50.213:3001/sharemessage/getreceiverName/' + username, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'

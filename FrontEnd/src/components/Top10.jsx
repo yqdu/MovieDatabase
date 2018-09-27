@@ -10,7 +10,7 @@ class Top10 extends React.Component {
         }
     }
     async componentDidMount() {
-        fetch('http://localhost:3001/movie/getTopTen')
+        fetch('http://45.76.50.213:3001/movie/getTopTen')
             .then((response) => {
                 console.log(response);
                 return response.json();

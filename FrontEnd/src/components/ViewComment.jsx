@@ -21,7 +21,7 @@ class ViewComment extends React.Component {
     }
 
     async componentDidMount() {
-        fetch('http://localhost:3001/comment/getmovieId/' + this.state.movieId)
+        fetch('http://45.76.50.213:3001/comment/getmovieId/' + this.state.movieId)
         .then((response) => {
             console.log(response);
             return response.json();

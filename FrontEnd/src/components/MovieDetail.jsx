@@ -48,7 +48,7 @@ class MovieDetail extends React.Component {
 
     async componentDidMount() {
         var movieId = window.location.pathname.split('/')[2];
-        fetch("http://localhost:3001/movie/getMovieById/" + movieId)
+        fetch("http://45.76.50.213:3001/movie/getMovieById/" + movieId)
         .then((response) => {
             return response.json();
         })
@@ -85,7 +85,7 @@ class MovieDetail extends React.Component {
     }
 
     markWatched(event) {
-        request.put('http://localhost:3001/user/watchedList/'+localStorage.getItem("userid")+"/"+this.state.movieId)
+        request.put('http://45.76.50.213:3001/user/watchedList/'+localStorage.getItem("userid")+"/"+this.state.movieId)
         .send({"id": localStorage.getItem("userid"), "movie": this.state.movieId})
         .end((err, resp) =>{
             if (resp.body.success == false) 
@@ -101,7 +101,7 @@ class MovieDetail extends React.Component {
     }
 
     addWishList(event) {
-        request.put('http://localhost:3001/user/wishList/'+localStorage.getItem("userid")+"/"+this.state.movieId)
+        request.put('http://45.76.50.213:3001/user/wishList/'+localStorage.getItem("userid")+"/"+this.state.movieId)
         .send({"id": localStorage.getItem("userid"), "movie": this.state.movieId})
         .end((err, resp) =>{
             if (resp.body.success == false) 
@@ -132,7 +132,7 @@ class MovieDetail extends React.Component {
     }
     
     handleUpdate(event) {
-        fetch('http://localhost:3001/movie/'+this.state.movieId, {
+        fetch('http://45.76.50.213:3001/movie/'+this.state.movieId, {
             method: 'PUT',
             headers: new Headers({
                 'Content-Type': 'application/json'

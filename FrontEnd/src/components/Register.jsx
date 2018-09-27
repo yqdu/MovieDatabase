@@ -54,7 +54,7 @@ class Register extends React.Component {
             register.append('password',this.state.password);
             register.append('profile',this.state.portrait);
 
-            request.post('http://localhost:3001/user/signup')
+            request.post('http://45.76.50.213:3001/user/signup')
             .send(register)
             .end((err, resp) =>{
                 if (resp.body.success == false) 

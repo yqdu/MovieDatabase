@@ -34,7 +34,7 @@ class LogIn extends React.Component {
     //waiting for the login api
     handleSubmit(event) {
         event.preventDefault();        
-        fetch('http://localhost:3001/user/login', {
+        fetch('http://45.76.50.213:3001/user/login', {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',

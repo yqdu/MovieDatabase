@@ -22,7 +22,7 @@ const redisConnection = require("./redis/redis-connection");
 const nrpSender = require("./redis/nrp-sender-shim")
 const cors = require('cors')
 app.use(cors());
-// app.options('*', cors());
+
 // app.use((req, res, next) => {
 //     res.set('Access-Control-Allow-Origin', '*');
 //     res.set('Access-Control-Allow-Headers', req.get('Access-Control-Request-Headers'));

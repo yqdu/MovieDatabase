@@ -69,7 +69,7 @@ class MessageCard extends React.Component {
             "movieName": this.state.movieName,
             "message": this.state.message
         }
-        request.post("http://localhost:3001/sharemessage/")
+        request.post("http://45.76.50.213:3001/sharemessage/")
         .send(sendMessage)
         .end((err, resp) =>{
             if (resp.body.success == false) 

@@ -22,7 +22,7 @@ class MovieList extends React.Component {
         if(curPage[1] === "MovieByKey") {
             //search movie by keyword
             var keyword = curPage[2];
-            fetch("http://localhost:3001/movie/searchKeyword/" + keyword)
+            fetch("http://45.76.50.213:3001/movie/searchKeyword/" + keyword)
             .then((response) => {
                 console.log(response);
                 return response.json();
@@ -42,7 +42,7 @@ class MovieList extends React.Component {
             var category = curPage[2];
             if(!curPage[3]) {
                 //get movies by category
-                fetch("http://localhost:3001/movie/searchByCategory/" + category)
+                fetch("http://45.76.50.213:3001/movie/searchByCategory/" + category)
                 .then((response) => {
                     console.log(response);
                     return response.json();
@@ -61,7 +61,7 @@ class MovieList extends React.Component {
             else {
                 //search by key in category
                 var keyInCategory = curPage[3]
-                fetch("http://localhost:3001/movie/searchInCategory/" + category + "/" + keyInCategory)
+                fetch("http://45.76.50.213:3001/movie/searchInCategory/" + category + "/" + keyInCategory)
                 .then((response) => {
                     console.log(response);
                     return response.json();

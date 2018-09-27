@@ -22,7 +22,7 @@ class AddComment extends React.Component {
 
     componentDidMount() {
         var movieId = window.location.pathname.split('/')[2];
-        fetch("http://localhost:3001/movie/getMovieById/" + movieId)
+        fetch("http://45.76.50.213:3001/movie/getMovieById/" + movieId)
         .then((response) => {
             console.log(response);
             return response.json();
@@ -75,7 +75,7 @@ class AddComment extends React.Component {
             'rating': this.state.rating,
             'date': dt.toLocaleDateString()
         }
-        request.post('http://localhost:3001/comment/')
+        request.post('http://45.76.50.213:3001/comment/')
         .send(AddComment)
         .end((err, resp) =>{
             if (resp.body.success == false) 

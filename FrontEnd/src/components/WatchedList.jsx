@@ -12,7 +12,7 @@ class Watched extends React.Component {
         let self = this;
         let userId = window.location.pathname.split('/')[2];
 
-        fetch('http://localhost:3001/user/getUserByDbId/' + userId, {
+        fetch('http://45.76.50.213:3001/user/getUserByDbId/' + userId, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
