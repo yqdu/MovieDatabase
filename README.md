@@ -2,6 +2,8 @@
 This is a simplified version of https://github.com/yqdu/MovieSharing
 Removed Elasticsearch and ImageMagick to be deployed on a limited performence server.
 Front-end is being rewrited.
+The server also provide public API for the database. 
+A sample use: get 'http://45.76.50.213:3001/movie/getTopTen'
 
 ## Introduction
 
